@@ -1,0 +1,29 @@
+#
+# ~/.aprc: AwesomePrint configuration
+#
+
+AwesomePrint.defaults = {
+    :indent     => -2,
+    :plain      => false,
+    :raw        => true,    
+    :index      => true,
+    :color      => {
+      :nilclass   => :gray,
+      :hash       => :gray,
+      :array      => :gray,
+      :fixnum     => :yellow,
+      :float      => :yellow,
+      :bigdecimal => :yellow,
+      :rational   => :yellow,
+      :date       => :yellowish,
+      :time       => :yellowish,
+      :trueclass  => :greenish,
+      :falseclass => :redish,
+      :class      => :white,
+      :struct     => :white,
+      :symbol     => :blue,
+      :keyword    => :cyan,
+      :method     => :blue,
+      :args       => :pale
+    }
+}
