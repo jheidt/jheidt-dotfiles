@@ -25,4 +25,11 @@ export ACK_PAGER="less -${LESS}"
 export LESSCHARSET='utf-8'
 export SYSTEMD_PAGER="less"
 export XZ_DEFAULTS="--threads=0"
-eval $(dircolors -b /etc/dir_colors)
+
+if   [[ -f ~/.dir_colors256 ]]; then
+    eval $(dircolors -b ~/.dir_colors256);
+elif [[ -f ~/.dir_colors ]]; then
+    eval $(dircolors -b ~/.dir_colors);
+elif [[ -f /usr/share/dircolors/dircolors.256dark ]]; then
+    eval $(dircolors -b /usr/share/dircolors/dircolors.256dark);
+fi

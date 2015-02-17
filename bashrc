@@ -10,6 +10,11 @@ shopt -s hostcomplete
 shopt -s nocaseglob
 
 #
+# load environment variables
+#
+[[ -f ~/.dotfiles/bash_environment.sh ]] && . ~/.dotfiles/bash_environment.sh
+
+#
 # load functions
 #
 [[ -f ~/.dotfiles/bash_functions.sh ]]   && . ~/.dotfiles/bash_functions.sh
@@ -20,17 +25,13 @@ shopt -s nocaseglob
 [[ -f ~/.dotfiles/bash_aliases.sh ]]     && . ~/.dotfiles/bash_aliases.sh
 
 #
-# load environment variables
-#
-[[ -f ~/.dotfiles/bash_environment.sh ]] && . ~/.dotfiles/bash_environment.sh
-
-#
 # powerline prompt - should only happen in 256 color terms (TODO)
 #
-function _update_ps1() {
-   export PS1="$(~/.powerline-shell.py $? 2> /dev/null)"
+function _update_ps1()
+{
+   export PS1="$(~/.powerline-shell.py $? 2>/dev/null)";
 }
-export PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+export PROMPT_COMMAND="_update_ps1 ; "
 
 #
 # load dynamic bashrc scripts
