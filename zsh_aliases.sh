@@ -33,8 +33,8 @@ alias cd....="cd ...."
 
 alias bi='bundle install --without production --full-index'
 
-alias cdccp='cd ~/Projects/cloudstack-customer-portal/'
-alias cdcms='cd ~/Projects/cloud-management-system/'
+alias cdccp='pushd ~/Projects/cloudstack-customer-portal/'
+alias cdcms='pushd ~/Projects/cloud-management-system/'
 #alias apt-full-upgrade='sudo apt-get update && sudo apt-get upgrade --assume-yes && sudo apt-get dist-upgrade --assume-yes && sudo mandb'
 alias glog="git log --format='%Cgreen%h%Creset %C(yellow)%an%Creset - %s' --graph"
 alias ccat="pygmentize -g -f terminal256 -O style=fruity"
