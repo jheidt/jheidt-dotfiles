@@ -3,12 +3,12 @@
 #
 
 export TERM=xterm-256color
-export HISTFILE="$HOME/.bash_history_$(hostname)"  # hostname appended to bash history filename
+export HISTFILE="$HOME/.zhist_$(hostname -s)"  # hostname appended to bash history filename
 export HISTSIZE=99999                              # bash history will save N commands
 export HISTFILESIZE=${HISTSIZE}                    # bash will remember N commands
-export HISTCONTROL=ignoreboth                      # ingore duplicates and spaces (ignoreboth, ignoredups, ignorespace)
-export HISTTIMEFORMAT="%d/%m/%y %T "
-export HISTIGNORE='fg:bg:ls:pwd:cd ..:cd ~:cd -:cd:jobs:set -x:ls -l:ls -la:ll:la'
+#export HISTCONTROL=ignoreboth                      # ingore duplicates and spaces (ignoreboth, ignoredups, ignorespace)
+#export HISTTIMEFORMAT="%d/%m/%y %T "
+#export HISTIGNORE='fg:bg:ls:pwd:cd ..:cd ~:cd -:cd:jobs:set -x:ls -l:ls -la:ll:la'
 export CCACHE_COMPRESS=1
 export LESS=FiXrMQnb4096
 export EDITOR=nano
@@ -26,10 +26,13 @@ export LESSCHARSET='utf-8'
 export SYSTEMD_PAGER="less"
 export XZ_DEFAULTS="--threads=0"
 
-if   [[ -f ~/.dir_colors256 ]]; then
-    eval $(dircolors -b ~/.dir_colors256);
-elif [[ -f ~/.dir_colors ]]; then
-    eval $(dircolors -b ~/.dir_colors);
+if   [[ -f "$HOME/.dircolors_256" ]]; then
+    eval $(dircolors -b ~/.dircolors_256);
+elif [[ -f "$HOME/.dircolors" ]]; then
+    eval $(dircolors -b ~/.dircolors);
 elif [[ -f /usr/share/dircolors/dircolors.256dark ]]; then
     eval $(dircolors -b /usr/share/dircolors/dircolors.256dark);
 fi
+
+BASE16_SHELL="$HOME/.config/base16-shell/base16-solarized.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
