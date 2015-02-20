@@ -10,7 +10,7 @@ export HISTFILESIZE=${HISTSIZE}                    # bash will remember N comman
 #export HISTTIMEFORMAT="%d/%m/%y %T "
 #export HISTIGNORE='fg:bg:ls:pwd:cd ..:cd ~:cd -:cd:jobs:set -x:ls -l:ls -la:ll:la'
 export CCACHE_COMPRESS=1
-export LESS=FiXrMQnb4096
+export LESS=FrnmC
 export EDITOR=nano
 export VISUAL=nano
 export MANPAGER=less
@@ -34,7 +34,7 @@ elif [[ -f /usr/share/dircolors/dircolors.256dark ]]; then
     eval $(dircolors -b /usr/share/dircolors/dircolors.256dark);
 fi
 
-BASE16_SHELL="$HOME/.config/base16-shell/base16-solarized.dark.sh"
+BASE16_SHELL="$HOME/.dotfiles/shellcolors"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
