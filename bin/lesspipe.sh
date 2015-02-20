@@ -7,21 +7,21 @@
 #===============================================================================
 #
 # Usage:   lesspipe.sh is called when the environment variable LESSOPEN is set:
-#    LESSOPEN="|lesspipe.sh %s"; export LESSOPEN  (sh like shells)
-#    setenv LESSOPEN "|lesspipe.sh %s"    (csh, tcsh)
-#    Use the fully qualified path if lesspipe.sh is not in the search path
-#    View files in multifile archives:
-#     less archive_file:contained_file
-#    This can be used to extract ASCII files from a multifile archive:
-#     less archive_file:contained_file>extracted_file
-#    As less is not good for extracting raw data use instead:
-#     lesspipe.sh archive_file:contained_file>extracted_file
+#	   LESSOPEN="|lesspipe.sh %s"; export LESSOPEN	(sh like shells)
+#	   setenv LESSOPEN "|lesspipe.sh %s"		(csh, tcsh)
+#	   Use the fully qualified path if lesspipe.sh is not in the search path
+#	   View files in multifile archives:
+#			less archive_file:contained_file
+#	   This can be used to extract ASCII files from a multifile archive:
+#			less archive_file:contained_file>extracted_file
+#	   As less is not good for extracting raw data use instead:
+#			lesspipe.sh archive_file:contained_file>extracted_file
 #          Even a file in a multifile archive that itself is contained in yet
 #          another archive can be viewed this way:
-#     less super_archive:archive_file:contained_file
-#    Display the last file in the file1:..:fileN chain in raw format:
-#    Suppress input filtering:  less file1:..:fileN:   (append a colon)
-#    Suppress decompression:  less file1:..:fileN::  (append 2 colons)
+#			less super_archive:archive_file:contained_file
+#	   Display the last file in the file1:..:fileN chain in raw format:
+#	   Suppress input filtering:	less file1:..:fileN:   (append a colon)
+#	   Suppress decompression:	less file1:..:fileN::  (append 2 colons)
 #
 # Required programs and supported formats: see the separate file README
 # License: GPL (see file LICENSE)
@@ -51,8 +51,8 @@ filecmd() {
   file -L -s -i "$@" 2> /dev/null | sed -n 's/.*charset=/;/p' | tr a-z A-Z
 }
 
-sep=:           # file name separator
-altsep==          # alternate separator character
+sep=:						# file name separator
+altsep==					# alternate separator character
 if [[ -f "$1" && "$1" = *$sep* || "$1" = *$altsep ]]; then
   sep=$altsep
   xxx="${1%=}"
@@ -114,13 +114,11 @@ filetype () {
     name="$filen"
   fi
   typeset type
-  type=" $(filecmd -b "$1")" # not supported by all versions of 'file'
-  #type=$(filecmd "$1" | cut -d : -f 2-)
+  # type=" $(filecmd -b "$1")" # not supported by all versions of 'file'
+  type=$(filecmd "$1" | cut -d : -f 2-)
   if [[ "$type" = " empty" ]]; then
     # exit if file returns "empty" (e.g., with "less archive:nonexisting_file")
     exit 1
-  elif [[ "$type" = *XML\ 1.0\ document* ]]; then
-    type=" XML\ document"
   elif [[ "$type" = *XML* && "$name" = *html ]]; then
     type=" HTML document text"
   elif [[ ("$type" = *HTML* || "$type" = *ASCII*) && "$name" = *xml ]]; then
@@ -133,12 +131,6 @@ filetype () {
        type=" PowerPoint document"
   elif [[ "$type" = *Microsoft\ Office\ Document* && ("$name" = *.xls) ]]; then
        type=" Excel document"
-  elif [[ "$type" = *LaTeX\ 2e\ document* ]]; then
-       type=" LaTeX document"
-  elif [[ "$type" = *Bourne-Again\ shell\ script* || ("$name" = *PKGBUILD*) || ("$name" = *.install) ]]; then
-       type=" BASH shell script"
-  elif [[ "$type" = *POSIX\ shell\ script* ]]; then
-       type=" POSIX shell script"
   fi
   echo "$type"
 }
@@ -179,13 +171,13 @@ show () {
     if cmd_exist lsbom; then
       if [[ ! -f "$file1" ]]; then
         if [[ "$type" = *directory* ]]; then
-    if [[ "$file1" = *.pkg ]]; then
-      if [[ -f "$file1/Contents/Archive.bom" ]]; then
-        type="bill of materials"
-        file1="$file1/Contents/Archive.bom"
-        msg "This is a Mac OS X archive directory, showing its contents (bom file)"
-      fi
-    fi
+	  if [[ "$file1" = *.pkg ]]; then
+	    if [[ -f "$file1/Contents/Archive.bom" ]]; then
+	      type="bill of materials"
+	      file1="$file1/Contents/Archive.bom"
+	      msg "This is a Mac OS X archive directory, showing its contents (bom file)"
+	    fi
+	  fi
         fi
       fi
     fi
@@ -292,7 +284,7 @@ get_cmd () {
   rsave="$rest1"
   rest1="$rest2"
   if [[ "$file2" != "" ]]; then
-    if [[ "$1" = *\ tar* || "$1" = *\ tar* ]]; then
+    if [[ "$1" = *\ tar* || "$1" = *\	tar* ]]; then
       cmd=(istar "$2" "$file2")
     elif [[ "$1" = *Debian* ]]; then
       t=$(nexttmp)
@@ -468,9 +460,8 @@ isfinal() {
       lang=${3#$sep}
       lang="-l ${lang#.}"
       lang=${lang%%-l }
-      if cmd_exist pygmentize; then
-        #pygmentize -f terminal -O encoding=utf-8,bg=$PYGMENTS_BG -g -Pm "$2"
-        pygmentize -f terminal256 -O encoding=utf-8,style=$PYGMENTS_STYLE -g -Pm "$2"
+      if cmd_exist code2color; then
+        code2color $PPID ${in_file:+"$in_file"} $lang "$2"
         if [[ $? = 0 ]]; then
           return
         fi
@@ -502,7 +493,7 @@ isfinal() {
     else
       "${cmd[@]}"
     fi
-  elif [[ "$1" = *\ tar* || "$1" = *\ tar* ]]; then
+  elif [[ "$1" = *\ tar* || "$1" = *\	tar* ]]; then
     msg "use tar_file${sep}contained_file to view a file in the archive"
     if [[ -n $COLOR ]] && cmd_exist tarcolor; then
       $tarcmd tvf "$2" | tarcolor
@@ -559,8 +550,8 @@ isfinal() {
   elif [[ "$1" = *Perl\ POD\ document\ text$NOL_A_P* ]] && cmd_exist perldoc; then
     msg "append $sep to filename to view the perl source"
     istemp perldoc "$2"
-  #elif [[ "$1" = *\ script* ]]; then
-    #set "plain text" "$2"
+  elif [[ "$1" = *\ script* ]]; then
+    set "plain text" "$2"
   elif [[ "$1" = *text\ executable* ]]; then
     set "plain text" "$2"
   elif [[ "$1" = *PostScript$NOL_A_P* ]]; then
@@ -595,7 +586,7 @@ isfinal() {
     elif cmd_exist rar; then
       msg "use rar_file${sep}contained_file to view a file in the archive"
       istemp "rar v" "$2"
-    fi
+    fi 
   elif [[ "$1" = *7-zip\ archive* || "$1" = *7z\ archive* ]] && cmd_exist 7za; then
     typeset res
     res=$(istemp "7za l" "$2")
@@ -731,22 +722,12 @@ isfinal() {
   elif [[ "$1" = *data$NOL_A_P* ]]; then
     msg "append $sep to filename to view the raw data"
     nodash strings "$2"
-  elif [[ "$1" = *BASH\ shell\ script* ]] || [[ "$1" = *POSIX\ shell\ script* ]] && cmd_exist pygmentize; then
-    #pygmentize -f terminal -O encoding=utf-8,bg=$PYGMENTS_BG -g -Pm "$2"
-    pygmentize -f terminal256 -O encoding=utf-8,style=$PYGMENTS_STYLE -l sh -g -Pm "$2"
-  elif [[ "$1" = *LaTeX\ document* ]] && cmd_exist pygmentize; then
-    #pygmentize -f terminal -O encoding=utf-8,bg=$PYGMENTS_BG -g -Pm "$2"
-    pygmentize -f terminal256 -O encoding=utf-8,style=$PYGMENTS_STYLE -l tex -Pm "$2"
-  elif [[ "$1" = *XML\ document* ]] && cmd_exist pygmentize; then
-    #pygmentize -f terminal -O encoding=utf-8,bg=$PYGMENTS_BG -g -Pm "$2"
-    pygmentize -f terminal256 -O encoding=utf-8,style=$PYGMENTS_STYLE -l xml -Pm "$2"
   else
     set "plain text" "$2"
   fi
   if [[ "$1" = *plain\ text* ]]; then
-    if cmd_exist pygmentize; then
-      #pygmentize -f terminal -O encoding=utf-8,bg=$PYGMENTS_BG -g -Pm "$2"
-      pygmentize -f terminal256 -O encoding=utf-8,style=$PYGMENTS_STYLE -g -Pm "$2"
+    if cmd_exist code2color; then
+      code2color $PPID ${in_file:+"$in_file"} "$2"
       if [[ $? = 0 ]]; then
         return
       fi
@@ -754,7 +735,7 @@ isfinal() {
   fi
   if [[ "$2" = - ]]; then
     cat
-  fi
+  fi  
 }
 
 IFS=$sep a="$@"

@@ -10,7 +10,7 @@ export HISTFILESIZE=${HISTSIZE}                    # bash will remember N comman
 #export HISTTIMEFORMAT="%d/%m/%y %T "
 #export HISTIGNORE='fg:bg:ls:pwd:cd ..:cd ~:cd -:cd:jobs:set -x:ls -l:ls -la:ll:la'
 export CCACHE_COMPRESS=1
-export LESS=FiXrMQnb4096
+export LESS='FRXCn'
 export EDITOR=nano
 export VISUAL=nano
 export MANPAGER=less
@@ -26,7 +26,7 @@ export LESSCHARSET='utf-8'
 export SYSTEMD_PAGER="less"
 export XZ_DEFAULTS="--threads=0"
 
-if   [[ -f "$HOME/.dircolors_256" ]]; then
+if [[ -f "$HOME/.dircolors_256" ]]; then
     eval $(dircolors -b ~/.dircolors_256);
 elif [[ -f "$HOME/.dircolors" ]]; then
     eval $(dircolors -b ~/.dircolors);
