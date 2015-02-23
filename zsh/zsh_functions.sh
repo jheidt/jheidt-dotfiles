@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 # man() {
 #     env \
 #     LESS_TERMCAP_mb=$(printf "\e[1;31m") \
@@ -22,6 +24,7 @@
 #     less "$@"
 # }
 
+>>>>>>> a4503e8ccb225aa3044ddf9a27361696ea9e94cf
 # ex - archive extractor
 # usage: ex <file>
 ex ()

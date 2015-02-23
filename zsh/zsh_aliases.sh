@@ -2,7 +2,11 @@
 # jheidt's bash aliases.
 #
 #alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+<<<<<<< HEAD
+alias ls='ls --time-style=+"%F %0l:%m %p" -lAFhG --group-directories-first --sort=version --color=auto'
+=======
 alias ls='ls --time-style=+"%F %0l:%m %p" -lAFhG --indicator-style=file-type --group-directories-first --sort=version --color=auto'
+>>>>>>> a4503e8ccb225aa3044ddf9a27361696ea9e94cf
 #alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 #alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 #alias grep='grep --color=tty -d skip'
@@ -115,3 +119,4 @@ alias ccat="pygmentize -g -f terminal256 -O style=fruity"
 alias lsmount='mount -l | sort --unique | column -t'
 alias riakcmd='s3cmd -c ~/.riakcfg'
 alias gitlog='git log -25 --graph --date-order -C -M --pretty=format:"%C(yellow)%h%C(reset) - %C(bold green)%ad%C(reset) - %C(dim yellow)%an%C(reset) %C(bold red)>%C(reset) %C(white)%s%C(reset) %C(bold red)%d%C(reset) " --abbrev-commit --date=short'
+alias ls='ls --time-style=+"%F %0l:%m %p" -lAFhG --group-directories-first --sort=version --color=auto'
