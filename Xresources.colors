@@ -1,22 +1,22 @@
-! Base16 Flat
-! Scheme: Chris Kempson (http://chriskempson.com)
+! Base16 Paraiso
+! Scheme: Jan T. Sott
 
-#define base00 #2C3E50
-#define base01 #34495E
-#define base02 #7F8C8D
-#define base03 #95A5A6
-#define base04 #BDC3C7
-#define base05 #e0e0e0
-#define base06 #f5f5f5
-#define base07 #ECF0F1
-#define base08 #E74C3C
-#define base09 #E67E22
-#define base0A #F1C40F
-#define base0B #2ECC71
-#define base0C #1ABC9C
-#define base0D #3498DB
-#define base0E #9B59B6
-#define base0F #be643c
+#define base00 #2f1e2e
+#define base01 #41323f
+#define base02 #4f424c
+#define base03 #776e71
+#define base04 #8d8687
+#define base05 #a39e9b
+#define base06 #b9b6b0
+#define base07 #e7e9db
+#define base08 #ef6155
+#define base09 #f99b15
+#define base0A #fec418
+#define base0B #48b685
+#define base0C #5bc4bf
+#define base0D #06b6ef
+#define base0E #815ba4
+#define base0F #e96ba8
 
 *.foreground:   base05
 *.background:   base00
