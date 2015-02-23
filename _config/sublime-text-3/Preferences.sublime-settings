@@ -1,51 +1,51 @@
 {
-    "auto_complete": false,
-    "auto_find_in_selection": true,
-    "auto_match_enabled": false,
-    "bold_folder_labels": true,
-    "caret_extra_width": 1,
-    "caret_style": "phase",
-    "close_windows_when_empty": false,
-    "color_scheme": "Packages/Theme - Spacegray/base16-eighties.dark.tmTheme",
-    "colored_folder_glyphs": true,
-    "copy_with_empty_selection": false,
-    "drag_text": false,
-    "draw_minimap_border": true,
-    "draw_white_space": "none",
-    "enable_tab_scrolling": false,
-    "fade_fold_buttons": false,
-    "file_exclude_patterns":
-    [
-        ".tags",
-        ".tags_sorted_by_file",
-        ".gemtags"
-    ],
-    "font_face": "Inconsolatazi4",
-    "font_options":
-    [
-        "subpixel_antialias",
-        "no_round"
-    ],
-    "font_size": 13,
-    "highlight_modified_tabs": true,
-    "ignored_packages":
-    [
-        "Vintage"
-    ],
-    "match_brackets_content": false,
-    "match_selection": false,
-    "match_tags": false,
-    "open_files_in_new_window": false,
-    "overlay_scroll_bars": "enabled",
-    "piatto_folder_icons": true,
-    "preview_on_click": false,
-    "scroll_past_end": true,
-    "scroll_speed": 5.0,
-    "shift_tab_unindent": true,
-    "show_full_path": false,
-    "sidebar_folders": true,
-    "theme": "Spacegray Eighties.sublime-theme",
-    "translate_tabs_to_spaces": true,
-    "trim_trailing_white_space_on_save": true,
-    "word_wrap": false
+	"auto_complete": false,
+	"auto_find_in_selection": true,
+	"auto_match_enabled": false,
+	"bold_folder_labels": true,
+	"caret_extra_width": 1,
+	"caret_style": "phase",
+	"close_windows_when_empty": false,
+	"color_scheme": "Packages/Base16 Color Schemes/base16-paraiso.dark.tmTheme",
+	"colored_folder_glyphs": true,
+	"copy_with_empty_selection": false,
+	"drag_text": false,
+	"draw_minimap_border": true,
+	"draw_white_space": "none",
+	"enable_tab_scrolling": false,
+	"fade_fold_buttons": false,
+	"file_exclude_patterns":
+	[
+		".tags",
+		".tags_sorted_by_file",
+		".gemtags"
+	],
+	"font_face": "Inconsolatazi4",
+	"font_options":
+	[
+		"subpixel_antialias",
+		"no_round"
+	],
+	"font_size": 13,
+	"highlight_modified_tabs": true,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"match_brackets_content": false,
+	"match_selection": false,
+	"match_tags": false,
+	"open_files_in_new_window": false,
+	"overlay_scroll_bars": "enabled",
+	"piatto_folder_icons": true,
+	"preview_on_click": false,
+	"scroll_past_end": true,
+	"scroll_speed": 5.0,
+	"shift_tab_unindent": true,
+	"show_full_path": false,
+	"sidebar_folders": true,
+	"theme": "Spacegray Eighties.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true,
+	"word_wrap": false
 }

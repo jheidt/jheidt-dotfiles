@@ -2,7 +2,10 @@
 #
 #
 
-export TERM=xterm-256color
+if [[ $TERM != "linux" ]]; then
+    export TERM=xterm-256color
+fi
+
 export HISTFILE="$HOME/.zhist_$(hostname -s)"  # hostname appended to bash history filename
 export HISTSIZE=99999                              # bash history will save N commands
 export HISTFILESIZE=${HISTSIZE}                    # bash will remember N commands
@@ -10,7 +13,8 @@ export HISTFILESIZE=${HISTSIZE}                    # bash will remember N comman
 #export HISTTIMEFORMAT="%d/%m/%y %T "
 #export HISTIGNORE='fg:bg:ls:pwd:cd ..:cd ~:cd -:cd:jobs:set -x:ls -l:ls -la:ll:la'
 export CCACHE_COMPRESS=1
-export LESS=FrnmC
+#export LESS=FrnmC
+export LESS="FXSgimnr~"
 export EDITOR=nano
 export VISUAL=nano
 export MANPAGER=less

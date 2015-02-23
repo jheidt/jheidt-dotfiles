@@ -1,0 +1,41 @@
+#
+# Executes commands at the start of an interactive session.
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+if [[ $TERM != "linux" ]]; then
+  export TERM=xterm-256color
+  if [[ -f "$HOME/.dircolors_256" ]]; then
+    eval $(dircolors -b "$HOME/.dircolors_256")
+  fi
+else
+  if [[ -f "$HOME/.dircolors" ]]; then
+    eval $(dircolors -b "$HOME/.dircolors")
+  fi
+fi
+
+if [[ -f "$HOME/.dotfiles/zsh/zsh_functions.sh" ]]; then
+  source "$HOME/.dotfiles/zsh/zsh_functions.sh"
+fi
+
+if [[ -f "$HOME/.dotfiles/zsh/zsh_aliases.sh" ]]; then
+  source "$HOME/.dotfiles/zsh/zsh_aliases.sh"
+fi
+
+if [[ -d "$HOME/.dotfiles/zsh/zshrc.d" ]]; then
+  for dyn_include in $HOME/.dotfiles/zsh/zshrc.d/*.sh; do
+    source "${dyn_include}"
+  done
+  unset dyn_include
+fi
+
+if [[ ! $(type rvm) =~ "function" ]]; then
+  source $HOME/.rvm/scripts/rvm
+fi
+
+setopt interactivecomments
+setopt autopushd

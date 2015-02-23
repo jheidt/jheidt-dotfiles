@@ -2,11 +2,7 @@
 # jheidt's bash aliases.
 #
 #alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-<<<<<<< HEAD
 alias ls='ls --time-style=+"%F %0l:%m %p" -lAFhG --group-directories-first --sort=version --color=auto'
-=======
-alias ls='ls --time-style=+"%F %0l:%m %p" -lAFhG --indicator-style=file-type --group-directories-first --sort=version --color=auto'
->>>>>>> a4503e8ccb225aa3044ddf9a27361696ea9e94cf
 #alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 #alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 #alias grep='grep --color=tty -d skip'
@@ -37,8 +33,8 @@ alias cd....="cd ...."
 
 alias bi='bundle install --without production --full-index'
 
-alias cdccp='pushd ~/Projects/cloudstack-customer-portal/'
-alias cdcms='pushd ~/Projects/cloud-management-system/'
+#alias cdccp='pushd ~/Projects/cloudstack-customer-portal/'
+#alias cdcms='pushd ~/Projects/cloud-management-system/'
 #alias apt-full-upgrade='sudo apt-get update && sudo apt-get upgrade --assume-yes && sudo apt-get dist-upgrade --assume-yes && sudo mandb'
 alias glog="git log --format='%Cgreen%h%Creset %C(yellow)%an%Creset - %s' --graph"
 alias ccat="pygmentize -g -f terminal256 -O style=fruity"
