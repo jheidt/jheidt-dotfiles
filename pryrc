@@ -31,7 +31,8 @@ Pry.config.prompt = [
 ]
 
 begin
-  require 'hirb'
+  #require 'hirb'
+  require 'hirb-unicode'
 
   Hirb.enable
 
