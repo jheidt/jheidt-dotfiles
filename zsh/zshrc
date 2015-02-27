@@ -37,5 +37,18 @@ if [[ ! $(type rvm) =~ "function" ]]; then
   source $HOME/.rvm/scripts/rvm
 fi
 
+if which archey3 &>/dev/null; then
+  archey3
+fi
+
+function _update_ps1()
+{
+  export PROMPT="$(python2 ~/.powerline-zsh.py $?)"
+}
+precmd()
+{
+  _update_ps1
+}
+
 setopt interactivecomments
 setopt autopushd
