@@ -24,13 +24,13 @@ zstyle ':prezto:load' pmodule \
   'pacman' \
   'fasd' \
   'tmux' \
-  'gpg' \
   'git' \
-  'ruby' \
-  'rails' \
   'history' \
   'history-substring-search'
+#  'gpg'
 #  'prompt'
+#  'ruby'
+#  'rails'
 
 
 # misc settings --------------------------------------------------------
