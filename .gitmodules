@@ -1,0 +1,3 @@
+[submodule "modules/blackbox"]
+	path = modules/blackbox
+	url = git@github.com:StackExchange/blackbox.git

@@ -23,13 +23,17 @@ zstyle ':prezto:load' pmodule \
   'archive' \
   'pacman' \
   'fasd' \
+  'tmux' \
+  'gpg' \
+  'git' \
+  'ruby' \
+  'rails' \
+  'history' \
   'history-substring-search'
 #  'prompt'
 
 
 # misc settings --------------------------------------------------------
-# zstyle ':prezto:module:prompt' theme 'moparx'
-#zstyle ':prezto:module:editor' key-bindings 'vi'
 zstyle ':prezto:module:editor' dot-expansion 'yes'
 zstyle ':prezto:module:pacman' frontend 'yaourt'
 
