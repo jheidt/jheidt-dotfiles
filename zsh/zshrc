@@ -41,6 +41,12 @@ if which archey3 &>/dev/null; then
   archey3
 fi
 
+if [[ -d $HOME/.pyenv ]]; then
+    export PATH="$HOME/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
+
 function _update_ps1()
 {
   export PROMPT="$(python2 ~/.powerline-zsh.py $?)"
