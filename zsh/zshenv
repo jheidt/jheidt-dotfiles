@@ -8,8 +8,16 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
 fi
 
 #
+# $HOME/.dotfiles/secrets/zshenv
+#
+if [[ -f "$HOME/.dotfiles/secrets/zshenv" ]]; then
+  source "$HOME/.dotfiles/secrets/zshenv"
+fi
+
+#
 # $HOME/.dotfiles/zsh/zsh_environment.sh
 #
 if [[ -f "$HOME/.dotfiles/zsh/zsh_environment.sh" ]]; then
   source "$HOME/.dotfiles/zsh/zsh_environment.sh"
 fi
+
