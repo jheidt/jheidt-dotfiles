@@ -35,18 +35,19 @@ fi
 
 fpath=("$HOME/.dotfiles/zsh/completions.d" $fpath)
 
+
+if [[ -d $HOME/.pyenv ]]; then
+    export PATH="$HOME/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
+
 if [[ ! $(type rvm) =~ "function" ]]; then
   source $HOME/.rvm/scripts/rvm
 fi
 
 if which archey3 &>/dev/null; then
   archey3
-fi
-
-if [[ -d $HOME/.pyenv ]]; then
-    export PATH="$HOME/.pyenv/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
 fi
 
 function _update_ps1()
