@@ -28,6 +28,8 @@ alias ccat='pygmentize -g -f terminal256 -O style=${PYGMENTS_STYLE:-fruity}'
 alias lsmount='mount -l | sort --unique | column -t'
 alias riakcmd='s3cmd -c ~/.riakcfg'
 alias gitlog='git log -25 --graph --date-order -C -M --pretty=format:"%C(yellow)%h%C(reset) - %C(bold green)%ad%C(reset) - %C(dim yellow)%an%C(reset) %C(bold red)>%C(reset) %C(white)%s%C(reset) %C(bold red)%d%C(reset) " --abbrev-commit --date=short'
+alias log-view='lnav'
+alias log-dest='lnav -t'
 #
 #
 #
