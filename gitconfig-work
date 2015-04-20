@@ -10,7 +10,7 @@
   legacyheaders = false # >git 1.5
   quotepath = false
   whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-    pager = less -R
+  pager = less -R
 
 [color]
   branch = auto
@@ -52,8 +52,15 @@
   algorithm = histogram
 
 [grep]
+  patternType = perl
   extendedRegexp = true
 
 [alias]
   current-branch = symbolic-ref --short HEAD
   cb = symbolic-ref --short HEAD
+
+[merge]
+  defaultToUpstream = true
+
+[rerere]
+  enabled = true
