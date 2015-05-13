@@ -215,9 +215,8 @@ build/
 .AURINFO
 .SRCINFO
 
-pkg/
-src/
-
+#pkg/
+#src/
 
 ### Rails template
 *.rbc

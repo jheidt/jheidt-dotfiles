@@ -30,6 +30,11 @@ export LESSCHARSET='utf-8'
 export SYSTEMD_PAGER="less"
 export XZ_DEFAULTS="--threads=0"
 
+if [[ -d "$HOME/.go" ]]; then
+    export GOPATH="$HOME/.go"
+    export PATH="$PATH:$HOME/.go/bin"
+fi
+
 if [[ -f "$HOME/.dircolors_256" ]]; then
     eval $(dircolors -b ~/.dircolors_256);
 elif [[ -f "$HOME/.dircolors" ]]; then
