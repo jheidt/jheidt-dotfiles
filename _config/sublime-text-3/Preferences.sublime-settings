@@ -6,7 +6,7 @@
 	"caret_extra_width": 1,
 	"caret_style": "phase",
 	"close_windows_when_empty": false,
-	"color_scheme": "Packages/Base16 Color Schemes/base16-eighties.dark.tmTheme",
+	"color_scheme": "Packages/Material Theme/schemes/Material-Theme-Darker.tmTheme",
 	"colored_folder_glyphs": true,
 	"copy_with_empty_selection": false,
 	"drag_text": false,
@@ -20,18 +20,20 @@
 		".tags_sorted_by_file",
 		".gemtags"
 	],
-	"font_face": "Inconsolatazi4",
+	"font_face": "Hasklig",
 	"font_options":
 	[
 		"subpixel_antialias",
 		"no_round"
 	],
-	"font_size": 11,
+	"font_size": 12,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
+	"line_padding_bottom": 1,
+	"line_padding_top": 1,
 	"match_brackets_content": false,
 	"match_selection": false,
 	"match_tags": false,
@@ -39,12 +41,15 @@
 	"overlay_scroll_bars": "enabled",
 	"piatto_folder_icons": true,
 	"preview_on_click": false,
+	"rubocop_path": "/home/jheidt/.rvm/gems/ruby-2.2.0@sys-default/bin/rubocop",
+	"ruby_path": "/home/jheidt/.rvm/rubies/ruby-2.2.0/bin/ruby",
 	"scroll_past_end": true,
 	"scroll_speed": 5.0,
 	"shift_tab_unindent": true,
+	"show_encoding": true,
 	"show_full_path": false,
 	"sidebar_folders": true,
-	"theme": "Spacegray Eighties.sublime-theme",
+	"theme": "Material-Theme.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"word_wrap": false

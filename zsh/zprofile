@@ -35,6 +35,7 @@ path=(
   /usr/local/{bin,sbin}
   $HOME/Scripts
   $HOME/.bin
+  $HOME/.local/bin
   $path
 )
 
