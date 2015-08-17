@@ -15,6 +15,8 @@ ex ()
       *.zip)       unzip $1     ;;
       *.Z)         uncompress $1;;
       *.7z)        7z x $1      ;;
+      *.lzo)       lzop --extract $1;;
+      *.lzop)      lzop --extract $1;;
       *)           echo "'$1' cannot be extracted via ex()" ;;
     esac
   else
@@ -67,11 +69,12 @@ function cbf()
 function yaourt_update_all ()
 {
     local args="$@";
-    rm -rf ~/.tmp &> /dev/null; mkdir ~/.tmp;
-    TMP=~/.tmp TMPDIR=~/.tmp TEMP=~/.tmp TEMPDIR=~/.tmp yaourt -Syyu --noconfirm $args;
-    rm -rf ~/.tmp &> /dev/null; mkdir ~/.tmp;
-    TMP=~/.tmp TMPDIR=~/.tmp TEMP=~/.tmp TEMPDIR=~/.tmp yaourt -Su   --noconfirm --aur $args;
-    rm -rf ~/.tmp &> /dev/null; mkdir ~/.tmp;
-    TMP=~/.tmp TMPDIR=~/.tmp TEMP=~/.tmp TEMPDIR=~/.tmp yaourt -Su   --noconfirm --devel $args;
-    rm -rf ~/.tmp
+    local YAOURT_TMP_LOCATION="/tmp/jheidt/tmp";
+    rm -rf "${YAOURT_TMP_LOCATION}" &> /dev/null; mkdir -p "${YAOURT_TMP_LOCATION}";
+    TMP="${YAOURT_TMP_LOCATION}" TMPDIR="${YAOURT_TMP_LOCATION}" TEMP="${YAOURT_TMP_LOCATION}" TEMPDIR="${YAOURT_TMP_LOCATION}" yaourt -Syyu --noconfirm $args;
+    rm -rf "${YAOURT_TMP_LOCATION}" &> /dev/null; mkdir -p "${YAOURT_TMP_LOCATION}";
+    TMP="${YAOURT_TMP_LOCATION}" TMPDIR="${YAOURT_TMP_LOCATION}" TEMP="${YAOURT_TMP_LOCATION}" TEMPDIR="${YAOURT_TMP_LOCATION}" yaourt -Su --noconfirm --aur $args;
+    rm -rf "${YAOURT_TMP_LOCATION}" &> /dev/null; mkdir -p "${YAOURT_TMP_LOCATION}";
+    TMP="${YAOURT_TMP_LOCATION}" TMPDIR="${YAOURT_TMP_LOCATION}" TEMP="${YAOURT_TMP_LOCATION}" TEMPDIR="${YAOURT_TMP_LOCATION}" yaourt -Su --noconfirm --devel $args;
+    rm -rf "${YAOURT_TMP_LOCATION}" &> /dev/null;
 }

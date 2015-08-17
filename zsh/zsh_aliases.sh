@@ -6,7 +6,7 @@ alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias np='nano PKGBUILD'
 alias df='df -h'
-alias diff='colordiff'
+alias diff='icdiff'
 alias du='du -c -h'
 alias grep='pcregrep --color=auto'
 alias mkdir='mkdir -p -v'
