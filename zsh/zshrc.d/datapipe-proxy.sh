@@ -46,10 +46,10 @@ function vpn_on()
 
   VPNSTATUS=$(nmcli -t -f NAME con show --active)
   if [[ ! "$VPNSTATUS" =~ DataPipeVPN ]]; then
-    nmcli con up uuid 934bb87a-95cc-4b9c-8e85-092bdda940b8
+    nmcli con up id DataPipeVPN
   fi
 
-  env AUTOSSH_LOGLEVEL=1 AUTOSSH_PIDFILE="${_autossh_pid_path}" autossh -f -N -M 20000 -D localhost:8585 ltsp2.int.smq.datapipe.net
+  env AUTOSSH_LOGLEVEL=1 AUTOSSH_PIDFILE="${_autossh_pid_path}" autossh -f -N -M 20000 -D localhost:8585 ltsp1.int.smq.datapipe.net
   sleep 1
 
   if [[ -f "${_autossh_pid_path}" ]]; then
@@ -83,7 +83,7 @@ function proxy_status()
 
 function proxy_on()
 {
-  gsettings set org.gnome.system.proxy.socks host 'localhost'
+  gsettings set org.gnome.system.proxy.socks host '127.0.0.1'
   gsettings set org.gnome.system.proxy.socks port 8585
   gsettings set org.gnome.system.proxy ignore-hosts "['localhost', '127.0.0.0/8', '::1', 'development.cms.dpcloud.com', 'development.cloud.datapipe.com']"
   gsettings set org.gnome.system.proxy mode manual
@@ -94,7 +94,7 @@ function proxy_on()
   export no_proxy="localhost, 127.0.0.0/8, development.cms.dpcloud.com, development.cloud.datapipe.com"
 
   unalias chromium &>/dev/null
-  alias chromium='/usr/bin/chromium --proxy-server="socks5://localhost:8585" --host-resolver-rules="MAP * 0.0.0.0, EXCLUDE 127.0.0.1"'
+  alias chromium='/usr/bin/chromium --proxy-server="socks5://127.0.0.1:8585" --host-resolver-rules="MAP * ~NOTFOUND , EXCLUDE 127.0.0.1"'
   return 0
 }
 
