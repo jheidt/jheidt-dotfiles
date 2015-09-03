@@ -1,0 +1,46 @@
+#
+# this file should be sourced in profile scripts to expose paths.
+#
+
+CDH_ROOT="/opt/CDH";
+CDH_CONF="$CDH_ROOT/etc";
+
+if [[ -d "$CDH_ROOT" ]]; then
+    export HADOOP_PREFIX="$CDH_ROOT/hadoop";
+    export HADOOP_CONF_DIR="$CDH_CONF/hadoop";
+    export HADOOP_MAPRED_HOME="$HADOOP_PREFIX/share/hadoop/mapreduce";
+    export HADOOP_COMMON_HOME=${HADOOP_PREFIX};
+    export HADOOP_HDFS_HOME=${HADOOP_PREFIX};
+    export HADOOP_YARN_HOME=${HADOOP_PREFIX};
+
+    export HIVE_HOME="$CDH_ROOT/hive"
+    export HIVE_CONF_DIR="$CDH_CONF/hive"
+
+    export PIG_HOME="$CDH_ROOT/pig"
+    export PIG_CONF_DIR="$CDH_CONF/pig"
+
+    export SPARK_HOME="$CDH_ROOT/spark"
+
+    if [[ -d "$CDH_CONF/hdfs" ]]; then
+        export HDFS_CONF_DIR="$CDH_CONF/hdfs"
+    fi
+    if [[ -d "$CDH_CONF/yarn" ]]; then
+        export YARN_CONF_DIR="$CDH_CONF/yarn"
+    fi
+    if [[ -d "$CDH_CONF/spark" ]]; then
+        export SPARK_CONF_DIR="$CDH_CONF/spark"
+    fi
+
+    if [[ -d "${HADOOP_PREFIX}/bin" ]]; then
+        export PATH="${PATH}:${HADOOP_PREFIX}/bin";
+    fi
+    if [[ -d "${PIG_HOME}/bin" ]]; then
+        export PATH="${PATH}:${PIG_HOME}/bin";
+    fi
+    if [[ -d "${HIVE_HOME}/bin" ]]; then
+        export PATH="${PATH}:${HIVE_HOME}/bin";
+    fi
+    if [[ -d "${SPARK_HOME}/bin" ]]; then
+        export PATH="${PATH}:${SPARK_HOME}/bin";
+    fi
+fi
