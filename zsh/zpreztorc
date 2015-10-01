@@ -21,14 +21,14 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'ssh' \
-  'completion' \
   'archive' \
   'pacman' \
   'fasd' \
   'tmux' \
   'git' \
   'history' \
-  'history-substring-search'
+  'history-substring-search' \
+  'prompt'
 #  'gpg'
 #  'prompt'
 #  'ruby'
@@ -38,6 +38,7 @@ zstyle ':prezto:load' pmodule \
 # misc settings --------------------------------------------------------
 zstyle ':prezto:module:editor' dot-expansion 'yes'
 zstyle ':prezto:module:pacman' frontend 'yaourt'
+zstyle ':prezto:module:prompt' theme 'powerlevel9k'
 
 #
 # Ruby
@@ -104,7 +105,7 @@ zstyle ':prezto:module:terminal' auto-title 'yes'
 # zstyle ':prezto:module:tmux:auto-start' local 'yes'
 
 # Auto start a session when Zsh is launched in a SSH connection.
-zstyle ':prezto:module:tmux:auto-start' remote 'yes'
+#zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
 # Integrate with iTerm2.
 # zstyle ':prezto:module:tmux:iterm' integrate 'yes'

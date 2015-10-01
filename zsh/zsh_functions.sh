@@ -78,3 +78,9 @@ function yaourt_update_all ()
     TMP="${YAOURT_TMP_LOCATION}" TMPDIR="${YAOURT_TMP_LOCATION}" TEMP="${YAOURT_TMP_LOCATION}" TEMPDIR="${YAOURT_TMP_LOCATION}" yaourt -Su --noconfirm --devel $args;
     rm -rf "${YAOURT_TMP_LOCATION}" &> /dev/null;
 }
+
+if [[ -f "/usr/share/vim/vim74/macros/less.sh" ]]; then
+  function = () {
+      /usr/share/vim/vim74/macros/less.sh "$*"
+  }
+fi

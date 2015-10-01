@@ -1,8 +1,15 @@
-# -*- encoding: utf-8 -*-
 require 'rubygems'
 
+begin
+  if (defined?(Deprecate))
+    Deprecate.skip = true
+  elsif (defined?(Gem::Deprecate))
+    Gem::Deprecate.skip = true
+  end
+rescue => e
+  $stderr.write("error skipping deprications: #{ e.message }")
+end
 
-# == Pry-Nav - Using pry as a debugger ==
 Pry.commands.alias_command 'c', 'continue' rescue nil
 Pry.commands.alias_command 's', 'step' rescue nil
 Pry.commands.alias_command 'n', 'next' rescue nil
@@ -12,12 +19,6 @@ Pry.config.color = true
 Pry.editor = proc { |file, line| "/usr/bin/subl #{file} +#{line}" }
 Pry.config.theme = 'tomorrow'
 
-
-# === CUSTOM PROMPT ===
-# This prompt shows the ruby version (useful for RVM)
-#
-# Pry.prompt = [proc { |obj, nest_level, _| "#{RUBY_VERSION} (#{obj}):#{nest_level} > " }, proc { |obj, nest_level, _| "#{RUBY_VERSION} (#{obj}):#{nest_level} * " }]
-#
 def colour(name, text)
   if RUBY_PLATFORM =~ /java/
     Pry.color ? "#{Pry::Helpers::Text.send name, '{text}'}".sub('{text}', "#{text}") : text
@@ -35,7 +36,6 @@ Pry.config.prompt = [
   end, proc { |object, nest_level, pry| colour :cyan, '» ' }
 ]
 
-
 # === Listing config ===
 # Better colors - by default the headings for methods are too
 # similar to method name colors leading to a "soup"
@@ -51,12 +51,14 @@ Pry.config.prompt = [
 # awesome_print gem: great syntax colorized printing
 # look at ~/.aprc for more settings for awesome_print
 begin
-  begin
-    require 'pry-clipboard'
-    Pry.config.commands.alias_command 'ch', 'copy-history'
-    Pry.config.commands.alias_command 'cr', 'copy-result'
-  rescue LoadError => e
-    puts "gem could not be required: pry-clipboard"
+  if 0 == 1
+    begin
+      require 'pry-clipboard'
+      Pry.config.commands.alias_command 'ch', 'copy-history'
+      Pry.config.commands.alias_command 'cr', 'copy-result'
+    rescue LoadError => e
+      puts "gem could not be required: pry-clipboard"
+    end
   end
 
   begin
@@ -65,13 +67,23 @@ begin
   rescue LoadError => e
     puts "gem could not be required: awesome_print"
   end
+
+  # begin
+  #   require 'epitools'
+  # rescue LoadError => e
+  #   puts "gem could not be required: epitools"
+  # end
+
+  if 0 == 1
+    begin
+      require 'gist'
+    rescue LoadError => e
+      puts "gem could not be required: gist"
+    end
+  end
 end
 
-require 'gist'
-
-# === CUSTOM COMMANDS ===
-# from: https://gist.github.com/1297510
-default_command_set = Pry::CommandSet.new do
+Pry.config.commands.import(Pry::CommandSet.new do
 
   command "copy", "Copy argument to the clip-board" do |str|
      IO.popen('xclip', 'w') { |f| f << str.to_s }
@@ -102,8 +114,7 @@ default_command_set = Pry::CommandSet.new do
     end
   end
 end
-
-Pry.config.commands.import default_command_set
+) # /.import
 
 MY_HOOK = Pry::Hooks.new.add_hook(:before_session, :add_dirs_to_load_path) do
   # adds the directories /spec and /test directories to the path if they exist and not already included
@@ -115,32 +126,30 @@ MY_HOOK = Pry::Hooks.new.add_hook(:before_session, :add_dirs_to_load_path) do
       dirs_added << p
     end
   end
-  puts "Added #{ dirs_added.join(", ") } to load path in ~/.pryrc." if dirs_added.present?
+  # puts "Added #{ dirs_added.join(", ") } to load path in ~/.pryrc." if dirs_added.present?
 end
 
 MY_HOOK.exec_hook(:before_session)
 
-if File.exist?('rails') && ENV['SKIP_RAILS'].nil?
-    if require('rails') && defined?(Rails)
-      if Rails.version[0..0] == "2"
-        require 'console_app'
-        require 'console_with_helpers'
-      elsif Rails.version[0..0] == "3"
-        require 'rails/console/app'
-        require 'rails/console/helpers'
-      else
-        warn "[WARN] cannot load Rails console commands (Not on Rails2 or Rails3?)"
-      end
-    end
-    if defined?(Rails) && Rails.env
-      begin
-        extend Rails::ConsoleMethods
-      rescue => e
-        puts "error extending rails console methods: #{ e.message }"
-      end
-    end
-end
+if ENV['SKIP_RAILS'].nil? && defined?(Rails)
+  puts "rails detected"
 
+  if Rails.version[0..0] == "2"
+    require 'console_app'
+    require 'console_with_helpers'
+  elsif Rails.version[0..0] == "3"
+    require 'rails/console/app'
+    require 'rails/console/helpers'
+  else
+    warn "[WARN] cannot load Rails console commands (Not on Rails2 or Rails3?)"
+  end
+
+  begin
+    extend Rails::ConsoleMethods
+  rescue => e
+    puts "error extending rails console methods: #{ e.message }"
+  end
+end
 
 # # === COLOR CUSTOMIZATION ===
 # # Everything below this line is for customizing colors, you have to use the ugly

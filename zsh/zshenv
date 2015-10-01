@@ -21,3 +21,6 @@ if [[ -f "$HOME/.dotfiles/zsh/zsh_environment.sh" ]]; then
   source "$HOME/.dotfiles/zsh/zsh_environment.sh"
 fi
 
+if [[ -d "$HOME/.virtualenvs" ]]; then
+    export WORKON_HOME="$HOME/.virtualenvs"
+fi

@@ -5,7 +5,7 @@
 AwesomePrint.defaults = {
     :indent     => -2,
     :plain      => false,
-    :raw        => true,    
+    :raw        => false,
     :index      => true,
     :color      => {
       :nilclass   => :gray,

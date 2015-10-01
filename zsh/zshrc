@@ -50,14 +50,25 @@ if which archey3 &>/dev/null; then
   archey3
 fi
 
-function _update_ps1()
-{
-  export PROMPT="$(python2 ~/.powerline-zsh.py $?)"
-}
-precmd()
-{
-  _update_ps1
-}
+# function _update_ps1()
+# {
+#   export PROMPT="$(python2 ~/.powerline-zsh.py $?)"
+# }
+# precmd()
+# {
+#   _update_ps1
+# }
 
 setopt interactivecomments
 setopt autopushd
+unsetopt auto_name_dirs
+
+unalias gg
+
+if [[ -f "/usr/bin/virtualenvwrapper.sh" ]]; then
+  source "/usr/bin/virtualenvwrapper.sh"
+fi
+
+export AWS_DEFAULT_PROFILE=default
+export DEFAULT_USER=jheidt
+

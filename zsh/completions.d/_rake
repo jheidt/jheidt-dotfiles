@@ -45,6 +45,9 @@ _rake_generate () {
 _rake () {
   if [ -f Rakefile ]; then
     if _rake_does_task_list_need_generating; then
+      if [ -f .rake_tasks ]; then
+        rm -f .rake_tasks &>/dev/null
+      fi
       echo "\nGenerating .rake_tasks..." > /dev/stderr
       _rake_generate
     fi
