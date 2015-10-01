@@ -1,0 +1,164 @@
+#!/usr/bin/env bash
+#
+# SPM - Scala Package Manager
+#
+
+SPM=`basename $0`
+SBT_FILE="build.sbt"
+BUILD_PROPERTIES="build.properties"
+VERSION="1.0.0"
+
+# global state
+SBT_FILE_CONTENT=""
+ADDED_LIBRARIES=()
+
+function buildSbtFileContent() {
+
+  SBT_FILE_CONTENT="
+lazy val root = (project in file(\".\")).settings(
+\n  name := \"$PROJECT_NAME\",
+\n  version := \"$PROJECT_VERSION\",
+\n  scalaVersion := \"$SCALA_VERSION\"
+\n)
+\n"
+}
+
+function addLibrary() {
+  SELECTED_LIBRARY=$1
+  DEP=(${SELECTED_LIBRARY//:/ })
+  GROUPID=${DEP[0]}
+  DEP=(${DEP[1]//@/ })
+  ARTIFACTID=${DEP[0]}
+  REVISION=${DEP[1]}
+  LIBRARY="\"$GROUPID\" % \"$ARTIFACTID\" % \"$REVISION\""
+
+  # add it to the list of added libraries
+  ADDED_LIBRARIES+=("$SELECTED_LIBRARY")
+
+  # @todo check if the library is already installed, dedup dependencies
+  echo -e "libraryDependencies += $LIBRARY" >> $SBT_FILE
+}
+
+function searchLibrary() {
+  SEARCH_QUERY=$1
+  SEARCH_SIZE=20
+  SEARCH_RESULTS=`curl --silent "http://search.maven.org/solrsearch/select?q=a:${SEARCH_QUERY}&rows=${SEARCH_SIZE}&wt=json"`
+  if [ $? != 0 ]; then
+    echo 'An error occured while search on maven.org.';
+    exit 1;
+  fi
+
+  # I will keep this line just to remember myself that the above code was done on a friday night train to Paris without internet (4th September 2015)
+  # SEARCH_RESULTS=`cat results.json`
+
+
+  MENU_OPTIONS=`echo ${SEARCH_RESULTS} | jq -r '.response.docs[] | "\(.id)@\(.latestVersion)"'`
+  MENU_OPTIONS_LENGTH=`echo ${SEARCH_RESULTS} | jq -r '.response.numFound'`
+
+  # todo handle the "not found" case
+  if [ $MENU_OPTIONS_LENGTH -eq "1" ]; then
+    addLibrary ${MENU_OPTIONS}
+  else
+    MENU_TEXT="Select library for '${SEARCH_QUERY}'"
+    MENU_YES_LABEL="Add to ${SBT_FILE}"
+
+    SELECTED_LIBRARY=`dialog --stdout \
+      --ok-label "${MENU_YES_LABEL}" \
+      --scrollbar \
+      --title "${SPM}" \
+      --yes-label "${MENU_YES_LABEL}" \
+      --no-items \
+      --menu "${MENU_TEXT}" 25 55 $SEARCH_SIZE $(echo $MENU_OPTIONS)`
+
+    clear
+
+    # if the user selected a library
+    if [ -n "${SELECTED_LIBRARY}" ]; then
+      addLibrary ${SELECTED_LIBRARY}
+    fi
+  fi
+}
+
+case $1 in
+  init)
+  PROJECT_NAME=${PWD##*/}
+  PROJECT_VERSION="1.0.0"
+  SCALA_VERSION="2.11.4"
+
+  echo -n "
+This utility will walk you through creating a $SBT_FILE file.
+It only covers the most common items, and tries to guess sane defaults.
+
+Use \`$SPM install <pkg> --save\` afterwards to install a package and
+save it as a dependency in the $SBT_FILE file.
+
+Press ^C at any time to quit."
+
+  # @todo f: ask [prompt] [defaultValue] => value
+  echo ""
+  echo -n "name: ($PROJECT_NAME) "
+  read PROJECT_NAME_OVERRIDEN
+  if [ -n "$PROJECT_NAME_OVERRIDEN" ]; then
+    PROJECT_NAME=$PROJECT_NAME_OVERRIDEN
+  fi
+
+  echo -n "version: ($PROJECT_VERSION) "
+  read PROJECT_VERSION_OVERRIDEN
+  if [ -n "$PROJECT_VERSION_OVERRIDEN" ]; then
+    PROJECT_VERSION=$PROJECT_VERSION_OVERRIDEN
+  fi
+
+  echo -n "scalaVersion: ($SCALA_VERSION) "
+  read SCALA_VERSION_OVERRIDEN
+  if [ -n "$SCALA_VERSION_OVERRIDEN" ]; then
+    SCALA_VERSION=$SCALA_VERSION_OVERRIDEN
+  fi
+
+  buildSbtFileContent
+
+  echo "About to write to $SBT_FILE:"
+  echo -e $SBT_FILE_CONTENT
+  echo ""
+  echo -n "Is this ok? (yes)"
+  read ABORT_WRITE
+  if [ -n "$ABORT_WRITE" ]; then
+    echo "Aborted."
+    exit 1
+  fi
+
+  echo -e "build.properties=1.0.0" > $BUILD_PROPERTIES
+  echo -e $SBT_FILE_CONTENT > $SBT_FILE
+    ;;
+
+  install)
+    for ((i=2;i<=$#;i++));
+    do
+      LIBRARY_QUERY=${!i}
+      searchLibrary $LIBRARY_QUERY
+    done
+
+    for ADDED_LIBRARY in "${ADDED_LIBRARIES[@]}"
+    do
+      echo "Installing $ADDED_LIBRARY..."
+    done
+
+    sbt update
+    ;;
+
+  start)
+    sbt run
+    ;;
+
+  version)
+    echo $VERSION
+    ;;
+  *)
+    echo ""
+    echo "Usage: $SPM <command>"
+    echo ""
+    echo "where <command> is one of:"
+    echo "  init, install, start, version"
+    ;;
+esac
+
+exit 0
