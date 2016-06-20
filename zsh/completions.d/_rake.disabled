@@ -55,5 +55,5 @@ _rake () {
   fi
 }
 
-compdef _rake rake
-alias rake_refresh='_rake_refresh'
+# compdef _rake rake
+# alias rake_refresh='_rake_refresh'

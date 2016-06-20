@@ -28,7 +28,7 @@ fi
 
 if [[ -d "$HOME/.dotfiles/zsh/zshrc.d" ]]; then
   for dyn_include in $HOME/.dotfiles/zsh/zshrc.d/*.sh; do
-    source "${dyn_include}"
+    source "${dyn_include}" || echo "failed sourcing: ${dyn_include}"
   done
   unset dyn_include
 fi
@@ -63,12 +63,35 @@ setopt interactivecomments
 setopt autopushd
 unsetopt auto_name_dirs
 
+export REPORTTIME=5
+
 unalias gg
+
+zmodload -i zsh/complist
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:functions'          ignored-patterns '_*'
+zstyle ':completion:*:*:kill:*'           menu yes select
+zstyle ':completion:*:kill:*'             force-list always
+zstyle ':completion:*'                       accept-exact '*(N)'
+zstyle ':completion:*'                       list-dirs-first true
+zstyle ':completion:*:default'               list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*'                       use-perl=1
+zstyle ':completion:*'                       squeeze-slashes true
+zstyle ':completion:*:cd:*'                  ignore-parents parent pwd
+zstyle ':completion:*:functions'             ignored-patterns '_*'
+
 
 if [[ -f "/usr/bin/virtualenvwrapper.sh" ]]; then
   source "/usr/bin/virtualenvwrapper.sh"
 fi
 
-export AWS_DEFAULT_PROFILE=default
+eval `keychain --quiet --nogui --eval id_rsa ccp_production cms_production id_rsa_desktop id_rsa_github`
+
 export DEFAULT_USER=jheidt
 
+if [[ -f "/etc/profile.d/vte.sh" ]]; then
+  source "/etc/profile.d/vte.sh"
+fi
+
+autoload -U compinit
+compinit

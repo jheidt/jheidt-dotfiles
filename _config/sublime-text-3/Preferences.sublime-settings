@@ -18,19 +18,20 @@
 		".tags_sorted_by_file",
 		".gemtags"
 	],
-	"font_face": "Hack",
+	"font_face": "Hasklig",
 	"font_options":
 	[
 		"subpixel_antialias",
+		"no_italic",
 		"no_round"
 	],
-	"font_size": 12,
+	"font_size": 13,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
-	"line_padding_bottom": 1,
-	"line_padding_top": 1,
+	"line_padding_bottom": 2,
+	"line_padding_top": 2,
 	"match_brackets_content": false,
 	"match_selection": false,
 	"match_tags": false,
@@ -42,7 +43,7 @@
 	"shift_tab_unindent": true,
 	"show_encoding": true,
 	"show_full_path": false,
-	"show_tab_close_buttons": false,
+	"show_tab_close_buttons": true,
 	"sidebar_folders": true,
 	"theme": "Carmesim.sublime-theme",
 	"translate_tabs_to_spaces": true,

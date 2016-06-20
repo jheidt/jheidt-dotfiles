@@ -43,7 +43,7 @@ window_tab_destroy_delay=10
 search_wrap_around=true
 search_match_case=false
 terminal_show_scrollbar=false
-terminal_font=Hasklig 11
+terminal_font=Hasklig 12
 terminal_auto_restart_shell=false
 terminal_scrollback_lines=2048
 terminal_cursorshape=1
@@ -72,15 +72,6 @@ terminal_width_VGA-0=95
 terminal_height_VGA-0=45
 window_position_y_VGA-0=-1
 window_position_x_VGA-0=1
-
-window_tabbar_ontop=false
-
-terminal_width_null=80
-terminal_height_null=50
-window_position_y_null=-1
-window_position_x_null=1
-
-terminal_scroll_by_page=true
 
 [KeyBindings]
 main_hotkey=F12
@@ -118,4 +109,3 @@ window_terminal_quick_settings=
 lock_tab=
 restore_tab=
 tab_custom_title=
-window_toggle_tabbar_visibility=

@@ -16,7 +16,6 @@ zstyle ':prezto:load' pmodule \
   'environment' \
   'terminal' \
   'editor' \
-  'history' \
   'directory' \
   'spectrum' \
   'utility' \
@@ -24,7 +23,6 @@ zstyle ':prezto:load' pmodule \
   'archive' \
   'pacman' \
   'fasd' \
-  'tmux' \
   'git' \
   'history' \
   'history-substring-search' \
